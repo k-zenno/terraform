@@ -44,14 +44,14 @@ resource "aws_subnet" "public-c" {
 }
 
 #プライベートA
-resource "aws_subnet" "public-a" {
+resource "aws_subnet" "private-a" {
     vpc_id = aws_vpc.vpc_Childcare_Service.id
     cidr_block = "10.10.1.0/24"
     availability_zone = "ap-northeast-1a"
 }
 
 #プライベートC
-resource "aws_subnet" "public-a" {
+resource "aws_subnet" "private-c" {
     vpc_id = aws_vpc.vpc_Childcare_Service.id
     cidr_block = "10.10.2.0/24"
     availability_zone = "ap-northeast-1c"
