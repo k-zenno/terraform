@@ -1,12 +1,12 @@
 variable "AWS_ACCESS_KEY" {}
-variable "AWS_SERCRET_KEY " {}
+variable "AWS_SERCRET_KEY" {}
 variable "region" {
     default = "ap-northeast-1"
 }
 
 provider "aws" {
     access_key = var.AWS_ACCESS_KEY
-    secret_key = var.AWS_SERCRET_KEY 
+    secret_key = var.AWS_SERCRET_KEY
     region = var.region
 }
 
