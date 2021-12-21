@@ -2,7 +2,7 @@
 #VPC
 #----------------------------------------------------------
 resource "aws_vpc" "vpc_Childcare_Service" {
-    cidr_block = var.vpc_cidr_block
+    cidr_block = "172.26.0.0/16"
     instance_tenancy = "default"
     enable_dns_support = "true"
     enable_dns_hostnames = "false"
