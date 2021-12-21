@@ -127,7 +127,9 @@ resource "aws_route_table_association" "private-c" {
 }
 
 
+#----------------------------------------------------------
 #セキュリティグループ
+#----------------------------------------------------------
 #DB用セキュリティグループ
 resource "aws_security_group" "SG_DB_Childcare_Service" {
     name = "SG_DB_Childcare_Service"
