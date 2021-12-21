@@ -66,7 +66,7 @@ resource "aws_internet_gateway" "igw_Childcare_Service" {
 resource "aws_eip" "eip_natgw_Childcare_Service" {
   vpc = true
 
-  tags {
+  tags = {
     Name = "eip_natgw_Childcare_Service"
     System = "CCS"
   }
