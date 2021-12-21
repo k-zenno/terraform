@@ -28,7 +28,7 @@ resource "aws_instance" "EC2_DB_Childcare_Service" {
 #----------------------------------------------------------
 #ALB
 resource "aws_lb" "ALB_Childcare_Service" {
-  name                       = "ALB_Childcare_Service"
+  name                       = "ALB-Childcare-Service"
   security_groups            = aws_security_group.SG_ALB_Childcare_Service.id
   subnets                    = [aws_subnet.private-a.id,aws_subnet.private-c.id]
   internal                   = false
@@ -41,7 +41,7 @@ resource "aws_lb" "ALB_Childcare_Service" {
 
 #ターゲットグループ
 resource "aws_lb_target_group" "TG_Childcare_Service" {
-  name     = "TG_Childcare_Service"
+  name     = "TG-Childcare-Service"
   port     = 80
   protocol = "HTTP"
   target_type = "ip"
