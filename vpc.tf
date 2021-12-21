@@ -122,7 +122,7 @@ resource "aws_route_table_association" "private-a" {
 }
 
 resource "aws_route_table_association" "private-c" {
-    subnet_id = aws_subnet.private.id
+    subnet_id = aws_subnet.private-c.id
     route_table_id = aws_route_table.private-route_Childcare_Service.id
 }
 
@@ -135,7 +135,7 @@ resource "aws_security_group" "SG_DB_Childcare_Service" {
     vpc_id = aws_vpc.vpc_Childcare_Service.id
     tags = {
       Name = "SG_DB_Childcare_Service"
-      Project = "CCS"
+      System = "CCS"
     }
 }
 
@@ -160,7 +160,7 @@ resource "aws_security_group" "SG_Fargate_Childcare_Service" {
     vpc_id = aws_vpc.vpc_Childcare_Service.id
     tags = {
       Name = "SG_Fargate_Childcare_Service"
-      Project = "CCS"
+      System = "CCS"
     }
 }
 #ルール
@@ -198,6 +198,6 @@ resource "aws_security_group" "SG_ALB_Childcare_Service" {
     vpc_id = aws_vpc.vpc_Childcare_Service.id
     tags = {
       Name = "SG_ALB_Childcare_Service"
-      Project = "CCS"
+      System = "CCS"
     }
 }

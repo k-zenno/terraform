@@ -4,20 +4,18 @@ variable "images" {
 }
 
 #DB用EC2作成
-resource "aws_instance" "NRI_EC2_Zenno_20201002" {
+resource "aws_instance" "EC2_DB_DB_Childcare_Service" {
     ami = var.images
-    instance_type = "t2.medium"
-    key_name = "uk-key"
+    instance_type = "t2.micro"
+    key_name = "zenno-test"
     vpc_security_group_ids = [
-      aws_security_group.NRI_SG_Zenno_20201002.id
+      aws_security_group.SG_DB_Childcare_Service.id
     ]
-    subnet_id = aws_subnet.public-a.id
+    subnet_id = aws_subnet.private-a.id
     associate_public_ip_address = "true"
 
     tags = {
-        Name = "NRI_EC2_Zenno_20201002"
-        Project = "NRI"
-        Month = "20201002_202011"
-        AutoStop = "ON"
+        Name = "EC2_DB_DB_Childcare_Service"
+        System = "CSS"
     }
 }
