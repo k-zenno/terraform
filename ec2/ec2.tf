@@ -19,7 +19,7 @@ resource "aws_instance" "EC2_DB_Childcare" {
 
     tags = {
         Name = "EC2_DB_Childcare"
-        System = "CSS"
+        System = "CC"
     }
 }
 
