@@ -22,7 +22,6 @@ resource "aws_cloudfront_distribution" "Cloudfront_Childcare" {
         
         forwarded_values {
             query_string = false
-            headers = none
              
             cookies {
               forward = "none"

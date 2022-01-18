@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "static-content" {
     effect = "Allow"
     principals {
         type = "AWS"
-        identifiers = [aws_cloudfront_origin_access_identity.static-www.content_arn]
+        identifiers = [aws_cloudfront_origin_access_identity.static-content.content_arn]
     }
     actions = [
         "s3:GetObject"
