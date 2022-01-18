@@ -1,21 +1,16 @@
-
-variable "images" {
-    default = "ami-03ed279742109860b"
-}
-
 #----------------------------------------------------------
 #EC2
 #----------------------------------------------------------
 #DB用EC2作成
 resource "aws_instance" "EC2_DB_Childcare" {
-    ami = var.images
+    ami = "ami-03ed279742109860b"
     instance_type = "t2.micro"
     key_name = "zenno-test"
     vpc_security_group_ids = [
       aws_security_group.SG_DB_Childcare.id
     ]
     subnet_id = aws_subnet.private-a.id
-    associate_public_ip_address = "true"
+    associate_public_ip_address = "false"
 
     tags = {
         Name = "EC2_DB_Childcare"

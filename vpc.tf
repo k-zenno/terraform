@@ -22,6 +22,10 @@ resource "aws_subnet" "public-a" {
     vpc_id = aws_vpc.vpc_Childcare.id
     cidr_block = "10.0.1.0/24"
     availability_zone = "ap-northeast-1a"
+    tags = {
+      Name = "Subnet_public-a_Childcare"
+      System = "CC"
+    }
 }
 
 #パブリックC
@@ -29,6 +33,10 @@ resource "aws_subnet" "public-c" {
     vpc_id = aws_vpc.vpc_Childcare.id
     cidr_block = "10.0.2.0/24"
     availability_zone = "ap-northeast-1c"
+    tags = {
+      Name = "Subnet_public-c_Childcare"
+      System = "CC"
+    }
 }
 
 #プライベートA
@@ -36,6 +44,10 @@ resource "aws_subnet" "private-a" {
     vpc_id = aws_vpc.vpc_Childcare.id
     cidr_block = "10.0.11.0/24"
     availability_zone = "ap-northeast-1a"
+    tags = {
+      Name = "Subnet_private-a_Childcare"
+      System = "CC"
+    }
 }
 
 #プライベートC
@@ -43,6 +55,10 @@ resource "aws_subnet" "private-c" {
     vpc_id = aws_vpc.vpc_Childcare.id
     cidr_block = "10.0.12.0/24"
     availability_zone = "ap-northeast-1c"
+    tags = {
+      Name = "Subnet_private-c_Childcare"
+      System = "CC"
+    }
 }
 
 
@@ -93,6 +109,10 @@ resource "aws_route_table" "public-route_Childcare" {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_internet_gateway.igw_Childcare.id
     }
+    tags = {
+        Name = "public-route_Childcare"
+        System = "CC"
+    }
 }
 
 #紐づけ
@@ -112,6 +132,10 @@ resource "aws_route_table" "private-route_Childcare" {
     route {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_nat_gateway.NATgw_Childcare.id
+    }
+    tags = {
+        Name = "private-route_Childcare"
+        System = "CC"
     }
 }
 
