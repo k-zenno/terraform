@@ -38,7 +38,7 @@ resource "aws_cloudfront_distribution" "Cloudfront_Childcare" {
         path_pattern     = "/api/*"
         allowed_methods  = [ "GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
         cached_methods   = ["GET", "HEAD"]
-        target_origin_id = aws_lb.ALB_Childcare.id
+        target_origin_id = aws_lb.ALB_Childcare.dnsname
 
         forwarded_values {
             query_string = false
