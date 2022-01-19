@@ -10,6 +10,15 @@ resource "aws_cloudfront_distribution" "Cloudfront_Childcare" {
           origin_access_identity = aws_cloudfront_origin_access_identity.static-content.cloudfront_access_identity_path
         }
     }
+    origin {
+      custom_origin_config {
+        https_port               = "443"
+        origin_protocol_policy   = "https-only"
+        origin_ssl_protocols     = ["TLSv1.2"]
+      }
+
+      domain_name = aws_lb.ALB_Childcare.domain_name
+    }
 
     enabled =  true
 
@@ -38,7 +47,7 @@ resource "aws_cloudfront_distribution" "Cloudfront_Childcare" {
         path_pattern     = "/api/*"
         allowed_methods  = [ "GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
         cached_methods   = ["GET", "HEAD"]
-        target_origin_id = aws_lb.ALB_Childcare.id
+        target_origin_id = aws_lb.ALB_Childcare.domain_name
 
         forwarded_values {
             query_string = false
