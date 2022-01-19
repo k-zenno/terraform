@@ -17,12 +17,11 @@ resource "aws_cloudfront_distribution" "Cloudfront_Childcare" {
         origin_ssl_protocols     = ["TLSv1.2"]
       }
 
-      domain_name = aws_lb.ALB_Childcare.domain_name
+      domain_name = aws_lb.ALB_Childcare.name
     }
 
     enabled =  true
 
-    default_root_object = "index.html"
 
     default_cache_behavior {
         allowed_methods = [ "GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
@@ -47,7 +46,7 @@ resource "aws_cloudfront_distribution" "Cloudfront_Childcare" {
         path_pattern     = "/api/*"
         allowed_methods  = [ "GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE" ]
         cached_methods   = ["GET", "HEAD"]
-        target_origin_id = aws_lb.ALB_Childcare.domain_name
+        target_origin_id = aws_lb.ALB_Childcare.name
 
         forwarded_values {
             query_string = false
