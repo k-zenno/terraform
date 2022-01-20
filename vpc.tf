@@ -224,3 +224,24 @@ resource "aws_security_group" "SG_ALB_Childcare" {
       System = "CC"
     }
 }
+
+#ルール
+resource "aws_security_group_rule" "InboundRule_ALB_Childcare" {
+  type        = "ingress"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = aws_security_group.SG_ALB_Childcare.id
+}
+
+resource "aws_security_group_rule" "OutboundRule_ALB_Childcare" {
+  type        = "egress"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = aws_security_group.SG_ALB_Childcare.id
+}
