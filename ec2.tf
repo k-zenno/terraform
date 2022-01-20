@@ -90,7 +90,7 @@ resource "aws_alb_listener" "alb-blue" {
 }
 
 resource "aws_lb_listener_rule" "http_header_based_routing" {
-  listener_arn = aws_lb_listener.alb-blue.arn
+  listener_arn = aws_alb_listener.alb-blue.arn
   priority = 10
 
   action {
