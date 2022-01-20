@@ -35,7 +35,7 @@ resource "aws_lb" "ALB_Childcare" {
 }
 
 #ターゲットグループ
-resource "aws_lb_target_group" "TG_Childcare" {
+resource "aws_lb_target_group" "TG_Childcare_Blue" {
   name     = "TG-Childcare"
   port     = 80
   protocol = "HTTP"
@@ -53,14 +53,55 @@ resource "aws_lb_target_group" "TG_Childcare" {
   }
 }
 
+resource "aws_lb_target_group" "TG_Childcare_Green" {
+  name     = "TG-Childcare"
+  port     = 80
+  protocol = "HTTP"
+  target_type = "ip"
+  vpc_id   = aws_vpc.vpc_Childcare.id
+
+  health_check {
+    interval            = 30
+    path                = "/"
+    port                = 80
+    protocol            = "HTTP"
+    timeout             = 5
+    unhealthy_threshold = 2
+    matcher             = 200
+  }
+}
+
+
 #リスナー
-resource "aws_alb_listener" "alb" {
+resource "aws_alb_listener" "alb-blue" {
   load_balancer_arn = aws_lb.ALB_Childcare.arn
   port              = "80"
   protocol          = "HTTP"
 
   default_action {
-    target_group_arn = aws_lb_target_group.TG_Childcare.arn
-    type             = "forward"
+    type             = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      status_code  = "443"
+      message_body = "forbidden"
+    }
+  }
+}
+
+resource "aws_lb_listener_rule" "http_header_based_routing" {
+  listener_arn = aws_lb_listener.alb-blue.arn
+  priority = 10
+
+  action {
+    type = "forward"
+    target_group_arn = aws_lb_target_group.TG_Childcare_Blue.arn
+  }
+
+  condition {
+    http_header {
+      http_header_name = "alb-header"
+      values           = "bft"
+    }
   }
 }

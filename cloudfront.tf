@@ -20,6 +20,11 @@ resource "aws_cloudfront_distribution" "Cloudfront_Childcare" {
 
       domain_name = aws_lb.ALB_Childcare.dns_name
       origin_id = aws_lb.ALB_Childcare.dns_name
+     
+      custom_header {
+        name  = "alb-header"
+        value = "bft"
+      }
     }
 
     enabled =  true
