@@ -101,7 +101,7 @@ resource "aws_lb_listener_rule" "http_header_based_routing" {
   condition {
     http_header {
       http_header_name = "alb-header"
-      values           = "bft"
+      values           = ["bft"]
     }
   }
 }
