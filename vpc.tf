@@ -166,7 +166,7 @@ resource "aws_security_group" "SG_DB_Childcare" {
 }
 
 #ルール
-resource "aws_security_group_rule" "InboundRule_DBPort_Childcare" {
+resource "aws_security_group_rule" "InboundRule_DB_Childcare" {
   type        = "ingress"
   from_port   = 5432
   to_port     = 5432
@@ -177,6 +177,17 @@ resource "aws_security_group_rule" "InboundRule_DBPort_Childcare" {
 
   security_group_id = aws_security_group.SG_DB_Childcare.id
 }
+
+resource "aws_security_group_rule" "OutboundRule_DB_Childcare" {
+  type        = "egress"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = aws_security_group.SG_DB_Childcare.id
+}
+
 
 #コンテナ用セキュリティグループ
 resource "aws_security_group" "SG_Fargate_Childcare" {
@@ -189,7 +200,7 @@ resource "aws_security_group" "SG_Fargate_Childcare" {
     }
 }
 #ルール
-resource "aws_security_group_rule" "InboundRule_ALBSubnet-a_Childcare" {
+resource "aws_security_group_rule" "InboundRule_Fargate_ALBSubnet-a_Childcare" {
   type        = "ingress"
   from_port   = 80
   to_port     = 80
@@ -202,7 +213,7 @@ resource "aws_security_group_rule" "InboundRule_ALBSubnet-a_Childcare" {
 }
 
 #ルール
-resource "aws_security_group_rule" "InboundRule_ALBSubnet-c_Childcare" {
+resource "aws_security_group_rule" "InboundRule_Fargate_ALBSubnet-c_Childcare" {
   type        = "ingress"
   from_port   = 80
   to_port     = 80
@@ -210,6 +221,16 @@ resource "aws_security_group_rule" "InboundRule_ALBSubnet-c_Childcare" {
   cidr_blocks = [
     "10.10.2.0/24"
   ]
+
+  security_group_id = aws_security_group.SG_Fargate_Childcare.id
+}
+
+resource "aws_security_group_rule" "OutboundRule_Fargate_Childcare" {
+  type        = "egress"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
 
   security_group_id = aws_security_group.SG_Fargate_Childcare.id
 }
