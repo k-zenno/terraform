@@ -1,8 +1,8 @@
 # Task Definition
 # https://www.terraform.io/docs/providers/aws/r/ecs_task_definition.html
 resource "aws_ecs_task_definition" "CC" {
-  family = "Linux"
-
+  family = "CC_taskdefinition"
+  execution_role_arn       = aws_iam_role.ecs_task_exec_role.arn
   # データプレーンの選択
   requires_compatibilities = ["FARGATE"]
 
@@ -51,7 +51,7 @@ resource "aws_ecs_service" "Childcare_service" {
 
   # ECSタスクへ設定するネットワークの設定
   network_configuration {
-    subnets         = [aws_subnet.private-a.id, aws_subnet.private-a.id]
+    subnets         = [aws_subnet.private-a.id, aws_subnet.private-c.id]
     security_groups = [aws_security_group.SG_Fargate_Childcare.id]
     assign_public_ip = "false"
   }
