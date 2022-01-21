@@ -18,19 +18,19 @@ resource "aws_ecs_task_definition" "CC" {
   # 起動するコンテナの定義
   # 「nginxを起動し、80ポートを開放する」設定を記述。
   container_definitions = <<EOL
-[
-  {
-    "name": "nginx",
-    "image": "nginx:1.14",
+  [
+    {
+    "name": "CC_container",
+    "image": "zenno-test-ecr:1.0",
     "portMappings": [
       {
         "containerPort": 80,
         "hostPort": 80
       }
     ]
-  }
-]
-EOL
+    }
+  ]
+  EOL
 }
 
 #クラスター
