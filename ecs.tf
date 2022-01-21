@@ -50,7 +50,7 @@ resource "aws_ecs_service" "Childcare_service" {
   deployment_maximum_percent         = 200
 
   # ECSタスクへ設定するネットワークの設定
-  network_configuration = {
+  network_configuration {
     subnets         = [aws_subnet.private-a.id, aws_subnet.private-a.id]
     security_groups = [aws_security_group.SG_Fargate_Childcare.id]
     assign_public_ip = "false"
