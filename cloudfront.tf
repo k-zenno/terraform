@@ -12,7 +12,7 @@ resource "aws_cloudfront_distribution" "Cloudfront_Childcare" {
     }
     origin {
       custom_origin_config {
-        http_port = "8080"
+        http_port = "80"
         https_port               = "443"
         origin_protocol_policy   = "https-only"
         origin_ssl_protocols     = ["TLSv1.2"]
