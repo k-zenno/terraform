@@ -1,0 +1,27 @@
+[
+    {
+        "image": "446156192429.dkr.ecr.ap-northeast-1.amazonaws.com/zenno-test-ecr:1.0",
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "Container_Log",
+                "awslogs-region": "ap-northeast-1",
+                "awslogs-stream-prefix": "ecs"
+            }
+        },
+        "cpu": 256,
+        "memory": 512,
+        "mountPoints": [],
+        "environment": [],
+        "networkMode": "awsvpc",
+        "name": "CC_container",
+        "essential": true,
+        "portMappings": [
+            {
+                "hostPort": 8080,
+                "containerPort": 8080,
+                "protocol": "tcp"
+            }
+        ]
+    }
+]

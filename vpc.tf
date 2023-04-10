@@ -91,7 +91,7 @@ resource "aws_eip" "eip_natgw_Childcare" {
 #NATゲートウェイ
 resource "aws_nat_gateway" "NATgw_Childcare" {
   allocation_id = aws_eip.eip_natgw_Childcare.id
-  subnet_id     = aws_subnet.private-a.id
+  subnet_id     = aws_subnet.public-a.id
 
   tags = {
     Name = "NATgw_Childcare"
@@ -131,7 +131,7 @@ resource "aws_route_table" "private-route_Childcare" {
     vpc_id = aws_vpc.vpc_Childcare.id
     route {
         cidr_block = "0.0.0.0/0"
-        gateway_id = aws_nat_gateway.NATgw_Childcare.id
+        nat_gateway_id = aws_nat_gateway.NATgw_Childcare.id
     }
     tags = {
         Name = "private-route_Childcare"
@@ -202,11 +202,11 @@ resource "aws_security_group" "SG_Fargate_Childcare" {
 #ルール
 resource "aws_security_group_rule" "InboundRule_Fargate_ALBSubnet-a_Childcare" {
   type        = "ingress"
-  from_port   = 80
-  to_port     = 80
-  protocol    = "tcp"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
   cidr_blocks = [
-    "10.10.1.0/24"
+    "10.0.1.0/24"
   ]
 
   security_group_id = aws_security_group.SG_Fargate_Childcare.id
@@ -215,11 +215,11 @@ resource "aws_security_group_rule" "InboundRule_Fargate_ALBSubnet-a_Childcare" {
 #ルール
 resource "aws_security_group_rule" "InboundRule_Fargate_ALBSubnet-c_Childcare" {
   type        = "ingress"
-  from_port   = 80
-  to_port     = 80
-  protocol    = "tcp"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"
   cidr_blocks = [
-    "10.10.2.0/24"
+    "10.0.2.0/24"
   ]
 
   security_group_id = aws_security_group.SG_Fargate_Childcare.id
